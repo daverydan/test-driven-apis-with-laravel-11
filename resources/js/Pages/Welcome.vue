@@ -168,7 +168,7 @@ function handleImageError() {
                 </main>
 
                 <footer class="py-16 text-center text-sm text-black dark:text-white/70">
-                    Laravel v{{ laravelVersion }} (PHP v{{ phpVersion }})
+                    <!-- Laravel v{{ laravelVersion }} (PHP v{{ phpVersion }}) -->
                 </footer>
             </div>
         </div>
