@@ -2,20 +2,19 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Employee extends Model
 {
     use HasFactory;
+    use HasUuids;
+    use SoftDeletes;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
     protected $fillable = [
         'uuid',
         'full_name',
@@ -27,15 +26,15 @@ class Employee extends Model
         'hourly_rate',
     ];
 
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
     protected $casts = [
         'id' => 'integer',
         'department_id' => 'integer',
     ];
+
+    public function getRouteKeyName(): string
+    {
+        return 'uuid';
+    }
 
     public function paychecks(): HasMany
     {
