@@ -4,7 +4,11 @@ namespace Database\Seeders;
 
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Employee;
+use App\Models\Paycheck;
+use App\Models\Department;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -13,11 +17,23 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        User::factory([
+            'name' => 'Admin User',
+            'email' => 'd@me.com',
+            'password' => Hash::make('password'),
+        ])->create();
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
+        Department::factory(5)
+            ->sequence(
+                ['name' => 'Development'],
+                ['name' => 'Marketing'],
+                ['name' => 'Sales'],
+                ['name' => 'Finance'],
+                ['name' => 'Administration'],
+            )
+            // ->has(Employee::factory()->count(50)
+            //     ->has(Paycheck::factory()->count(12))
+            // )
+            ->create();
     }
 }
